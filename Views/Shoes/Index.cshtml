@@ -28,11 +28,7 @@
                     <td>@Shoes.Img2</td>
                     <td scope="col">
                         <a class="btn btn-primary" asp-controller="Shoes" asp-action="Details" asp-route-id="@Shoes.ShoesId">Dettagli</a>
-                        <a class="btn btn-warning" asp-controller="Shoes" asp-action="Edit" asp-route-id="@Shoes.ShoesId">Modifica</a>
-                        <form style="display: inline" asp-controller="Shoes" asp-action="SoftDelete" method="post">
-                        <input type="hidden" name="ShoesId" value="@Shoes.ShoesId" />
-                            <button type="submit" class="btn btn-danger">Soft Delete</button>
-                        </form>
+                        <a class="btn btn-warning" asp-controller="Shoes" asp-action="Edit" asp-route-id="@Shoes.ShoesId">Modifica</a>                     
                         <a class="btn btn-danger" asp-controller="Shoes" asp-action="Delete" asp-route-id="@Shoes.ShoesId">Delete</a>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-@Shoes.ShoesId">
                             Delete modale

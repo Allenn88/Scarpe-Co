@@ -11,7 +11,7 @@ namespace Scarpe___Co.Models
         private static List<Shoes> _shoes = [
             new Shoes() { ShoesId = 1, Name = "Nike", Price= 150, Description = "Scarpe sportive", ImgCopertina = "Img", Img1 = "img", Img2 = "img", },
             new Shoes() { ShoesId = 2, Name = "Adidas", Price = 1500, Description = "Trekking", ImgCopertina = "Img", Img1 = "Img", Img2 = "Img", },
-            new Shoes() { ShoesId = 2, Name = "Nike", Price = 1500, Description = "Total90, calcetto", ImgCopertina = "Img", Img1 = "Img", Img2 = "Img", },
+            new Shoes() { ShoesId = 3, Name = "Nike", Price = 1500, Description = "Total90, calcetto", ImgCopertina = "Img", Img1 = "Img", Img2 = "Img", },
 
             ];
         public static List<Shoes> GetAll()
@@ -28,9 +28,36 @@ namespace Scarpe___Co.Models
             _shoes.Add(shoes);
             return shoes;
         }
-        [HttpGet]
-        public static Edit([FromRoute] int? ShoesId)
+        public static Shoes? Modify(Shoes shoes)
         {
-            if(ShoesId is null) return RedirectToAction("Index", "Shoes");
+            foreach(var shoesInList in _shoes)
+            {
+                if (shoesInList.ShoesId == shoes.ShoesId)
+                {
+                    shoesInList.Name = shoes.Name;
+                    shoesInList.Description = shoes.Description;
+                    shoesInList.Price = shoes.Price;   
+                    shoesInList.ImgCopertina = shoes.ImgCopertina;
+                    shoesInList.Img1 = shoes.Img1;  
+                    shoesInList.Img2 = shoes.Img2;
+                    return shoesInList;
+                }
+            }
+                return null;
+            
         }
+        public static Shoes? GetById(int? id)
+        {
+            if (id is null) return null;
+            for(int i = 0; i < _shoes.Count; i++)
+            {
+                Shoes shoes = _shoes[i];
+                if (shoes.ShoesId == id)
+                {
+                    return shoes;
+                }
+            }
+            return null;
+        }
+    }
 }

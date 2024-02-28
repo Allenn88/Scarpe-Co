@@ -21,12 +21,19 @@ namespace Scarpe___Co.Controllers
             var Shoes = StaticDb.Add(Name, Price, Description, ImgCopertina, Img1, Img2);
             return View(Shoes);
         }
+        [HttpGet]
+        public IActionResult Edit(int? id) 
+        {
+            var shoes = StaticDb.GetById(id);
+            return View(shoes);
+        }
+        [HttpPost]
         public IActionResult Edit(Shoes shoes)
         {
             var upadateShoes = StaticDb.Modify(shoes);
             if (upadateShoes is null) return View("Error");
 
-            return RedirectToAction("Details", new { id = upadateShoes.ShoesId });
+            return RedirectToAction("Edit", new { id = upadateShoes.ShoesId });
 
         }
     }
