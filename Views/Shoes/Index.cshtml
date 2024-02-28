@@ -1,0 +1,62 @@
+﻿<div class="container">
+    <h2>Shoes</h2>
+    <div>
+        <a class="btn btn-primary" asp-controller="Shoes" asp-action="Add" asp-route-id="">Aggiungi</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Prezzo</th>
+                <th scope="col">Descrizione</th>
+                <th scope="col">Immagine di Copertina</th>
+                <th scope="col">Immagine 1</th>
+                <th scope="col">Immagine 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Shoes in Model)
+            {
+                <tr>
+                    <td>@Shoes.ShoesId</td>
+                    <td>@Shoes.Name</td>
+                    <td>@Shoes.Price</td>
+                    <td>@Shoes.Description</td>
+                    <td>@Shoes.ImgCopertina</td>
+                    <td>@Shoes.Img1</td>
+                    <td>@Shoes.Img2</td>
+                    <td scope="col">
+                        <a class="btn btn-primary" asp-controller="Shoes" asp-action="Details" asp-route-id="@Shoes.ShoesId">Dettagli</a>
+                        <a class="btn btn-warning" asp-controller="Shoes" asp-action="Edit" asp-route-id="@Shoes.ShoesId">Modifica</a>
+                        <form style="display: inline" asp-controller="Shoes" asp-action="SoftDelete" method="post">
+                        <input type="hidden" name="ShoesId" value="@Shoes.ShoesId" />
+                            <button type="submit" class="btn btn-danger">Soft Delete</button>
+                        </form>
+                        <a class="btn btn-danger" asp-controller="Shoes" asp-action="Delete" asp-route-id="@Shoes.ShoesId">Delete</a>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-@Shoes.ShoesId">
+                            Delete modale
+                        </button>
+                    <div class="modal fade" id="modal-@Shoes.ShoesId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Sei sicuro?</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                        <form asp-controller="Shoes" asp-action="Delete" method="post">
+                                        <input type="hidden" name="ShoesId" value="@Shoes.ShoesId" />
+                                            <button type="submit" class="btn btn-primary">Si elimina</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
